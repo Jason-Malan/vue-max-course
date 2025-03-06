@@ -4,8 +4,14 @@
       <h1>My Friends</h1>
     </header>
     <ul>
-      <friend-contact />
-      <friend-contact />
+      <friend-contact
+        v-for="friend in friends"
+        :key="friend.id"
+        :name="friend.name"
+        :email-address="friend.email"
+        :phone-number="friend.phone"
+        :fav="friend.fav"
+      />
     </ul>
   </section>
 </template>
@@ -22,12 +28,14 @@ export default {
           name: "Manuel Lorenz",
           phone: "108 0883 4352",
           email: "manuel@gmail.com",
+          fav: false,
         },
         {
           id: "jason",
           name: "Jason Malan",
           phone: "023 1232 3145",
           email: "jason@gmail.com",
+          fav: true,
         },
       ],
     };

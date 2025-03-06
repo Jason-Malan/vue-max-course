@@ -1,25 +1,44 @@
 <template>
   <li>
-    <h2>{{ friend.name }}</h2>
+    <h2>{{ name }} {{ fav ? "(fav)" : "" }}</h2>
     <button @click="toggleDetails">Show Details</button>
     <ul v-if="detailsAreVisible">
-      <li><strong>Phone:</strong> {{ friend.phone }}</li>
-      <li><strong>Email:</strong> {{ friend.email }}</li>
+      <li><strong>Phone:</strong> {{ phoneNumber }}</li>
+      <li><strong>Email:</strong> {{ emailAddress }}</li>
     </ul>
   </li>
 </template>
 
 <script>
 export default {
+  // props: ["name", "emailAddress", "phoneNumber"],
+  props: {
+    fav: {
+      type: Boolean,
+      default: false,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+    emailAddress: {
+      type: String,
+      required: true,
+    },
+    phoneNumber: {
+      type: String,
+      required: true,
+      // validator: function (value) {
+      //   return value.length > 1;
+      // },
+      validator(value) {
+        return value.length > 1;
+      },
+    },
+  },
   data() {
     return {
       detailsAreVisible: false,
-      friend: {
-        id: "Manuel",
-        name: "Manuel Lorenz",
-        phone: "108 0883 4352",
-        email: "manuel@gmail.com",
-      },
     };
   },
   methods: {
