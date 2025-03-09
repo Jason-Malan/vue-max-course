@@ -2,6 +2,7 @@
   <li>
     <h2>{{ name }} {{ fav ? "(fav)" : "" }}</h2>
     <button @click="toggleDetails">Show Details</button>
+    <button @click="toggleFav()">Toggle Fav</button>
     <ul v-if="detailsAreVisible">
       <li><strong>Phone:</strong> {{ phoneNumber }}</li>
       <li><strong>Email:</strong> {{ emailAddress }}</li>
@@ -13,6 +14,10 @@
 export default {
   // props: ["name", "emailAddress", "phoneNumber"],
   props: {
+    id: {
+      type: String,
+      required: true,
+    },
     fav: {
       type: Boolean,
       default: false,
@@ -44,6 +49,9 @@ export default {
   methods: {
     toggleDetails() {
       this.detailsAreVisible = !this.detailsAreVisible;
+    },
+    toggleFav() {
+      this.$emit("toggle-fav", this.id);
     },
   },
 };
